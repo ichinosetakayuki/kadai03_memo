@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/style.css">
+  <title>Document</title>
+</head>
+
+<body>
+  <div id="calendar"></div>
+  <button onclick="prevMonth()">←</button>
+  <button onclick="nextMonth()">→</button>
+
+  <div class="calendar_wrapper">
+    <div class="month_box">
+      <div id="prev"><img src="caret-left.svg" alt="">前月</div>
+      <h2 id="month"></h2>
+      <div id="next">翌月<img src="caret-right.svg" alt=""></div>
+    </div>
+
+
+    <table>
+      <thead>
+        <tr id="dayLabel"></tr>
+      </thead>
+      <tbody>
+
+      </tbody>
+    </table>
+  </div>
+
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script src="js/main.js"></script>
+
+</body>
+
+</html>
