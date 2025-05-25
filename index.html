@@ -9,27 +9,51 @@
 </head>
 
 <body>
-  <div id="calendar"></div>
-  <button onclick="prevMonth()">←</button>
-  <button onclick="nextMonth()">→</button>
+  <div class="wrapper">
+    <!-- <div class="photo_box">
+      <img src="img/moritaka_img14.png" alt=""> -->
+    <!-- </div> -->
+    <div class="cal_wrapper">
+      <h1>森高千里 <span>Calendar</span></h1>
+      <div class="cal_container">
+        <div class="month_box">
+          <div id="prev"><img src="img/caret-left.svg" alt="">前月</div>
+          <h2 id="month"></h2>
+          <div id="next">翌月<img src="img/caret-right.svg" alt=""></div>
+        </div>
 
-  <div class="calendar_wrapper">
-    <div class="month_box">
-      <div id="prev"><img src="caret-left.svg" alt="">前月</div>
-      <h2 id="month"></h2>
-      <div id="next">翌月<img src="caret-right.svg" alt=""></div>
+
+        <table>
+          <thead>
+            <tr id="dayLabel"></tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="overlay">
+      <div class="modal_content">
+        <p id="modalTitle">日付</p>
+        <form id="scheduleForm" action="">
+          <input type="text" id="title" name="title" placeholder="タイトル" required>
+          <label for="startTime">開始時間</label>
+          <input id="startTime" type="time" name="startTime">
+          <label for="endTime">終了時間</label><input id="endTime" type="time">
+          <label for="place">場所<input id="place" type="text" name="place"></label>
+          <textarea name="note" id="note" placeholder="備考"></textarea>
+          <input type="hidden" id="date" name="date">
+          <button id="save" type="button">保存</button>
+        </form>
+        <button id="close">閉じる</button>
+      </div>
     </div>
 
 
-    <table>
-      <thead>
-        <tr id="dayLabel"></tr>
-      </thead>
-      <tbody>
-
-      </tbody>
-    </table>
   </div>
+
+
+
 
 
 

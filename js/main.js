@@ -20,11 +20,13 @@ console.log(month);
 
 const days = ['月', '火', '水', '木', '金', '土', '日'];
 
-
 $("#month").html(year + '年' + (month + 1) + '月');
+
 days.forEach(d => $("#dayLabel").append(`<th class="day_of_week">${d}</th>`));
 
-function getPrevMonthdays(year, month) {//引数を入れる修正必要！
+
+
+function getPrevMonthdays(year, month) {
   const prevMonthDate = new Date(year, month, 0);
   const d = prevMonthDate.getDate();
   const prevMonth = prevMonthDate.getMonth() + 1;
@@ -38,7 +40,7 @@ function getPrevMonthdays(year, month) {//引数を入れる修正必要！
       month: prevMonth,
       date: d - i,
       isToday: false,
-      isdisabled: true,
+      isDisabled: true,
       isHoliday: false,
     });
   }
@@ -58,7 +60,7 @@ function getCurrentMonthDays(year, month) {
       month: month + 1,
       date: i,
       isToday: false,
-      isdisabled: false,
+      isDisabled: false,
       isHoliday: false,
     })
   }
@@ -84,7 +86,7 @@ function getNextMonthdays(year, month) {
         month: nextMonth,
         date: i,
         isToday: false,
-        isdisabled: true,
+        isDisabled: true,
         isHoliday: false,
       })
     }
@@ -96,6 +98,9 @@ function getNextMonthdays(year, month) {
 getNextMonthdays(year, month);
 
 function makeCalendar(year, month) {
+
+  $("#month").html(year + '年' + (month + 1) + '月');
+
   $("tbody").empty();
   const dates = [
     ...getPrevMonthdays(year, month),
@@ -125,15 +130,15 @@ function makeCalendar(year, month) {
       const monthStr = String(date.month).padStart(2, '0');
       const dayStr = String(date.date).padStart(2, '0');
       const dateId = `day${date.year}${monthStr}${dayStr}`;
-      $(`#row${i}`).append(`<td><div class="date_box"><div id="${dateId}" class="day_box">${date.date}</div><div class=memo_box></div></div></td>`);
+      $(`#row${i}`).append(`<td><div id="${dateId}" class="date_box"><div class="day_box">${date.date}</div><div class=memo_box></div></div></td>`);
       if (date.isToday) {
         $(`#${dateId}`).addClass('today');
       }
+      if (date.isDisabled) {
+        $(`#${dateId}`).addClass('isdisabled');
+      }
     });
   }
-
-
-  // return weeks;
 }
 
 makeCalendar(year, month);
@@ -156,43 +161,29 @@ $("#next").on("click", function () {
   makeCalendar(year, month);
 });
 
+//予定表入力
+const allScheduleData = [];
 
-// const today = new Date();
-// console.log(today.toLocaleString());
-// let current = new Date();
+$("#save").on("click", function () {
+  const scheduleData = {
+    date:$("#modalTitle").text(),
+    title: $("#title").val(),
+    start: $("#startTime").val(),
+    end: $("#endTime").val(),
+    place: $("#place").val(),
+    note: $("#note").val(),
+  }
+  allScheduleData.push(scheduleData),
+    console.log(allScheduleData);
+  localStorage.setItem('data', JSON.stringify(allScheduleData));
+});
 
-// function renderCalendar() {
-//   const year = current.getFullYear();
-//   const month = current.getMonth();
-//   const firstDay = new Date(year, month, 1);
-//   const lastDay = new Date(year, month + 1, 0);
-//   const startDay = firstDay.getDay();
-//   const daysInMonth = lastDay.getDate();
+$("tbody").on("click", ".date_box", function () {
+  const dateBoxId = $(this).attr('id');
+  console.log(dateBoxId);
+  const sheduleDate = `${dateBoxId.substr(3, 4)}年${dateBoxId.substr(7, 2)}月${dateBoxId.substr(9, 11)}日`;
+  console.log(sheduleDate);
+  $("#modalTitle").text(sheduleDate);
 
-//   let html = `<h2>${year}年 ${month + 1}月</h2><table><tr>`;
-//   const days = ['日', '月', '火', '水', '木', '金', '土'];
-//   days.forEach(d => html += `<th>${d}</th>`);
-//   html += `</tr><tr>`;
+});
 
-//   for (let i = 0; i < startDay; i++) html += `<td></td>`;
-
-//   for (let d = 1; d <= daysInMonth; d++) {
-//     if ((startDay + d - 1) % 7 === 0) html += `</tr><tr>`;
-//     html += `<td>${d}</td>`;
-//   }
-
-//   html += `</tr></table>`;
-//   document.getElementById('calendar').innerHTML = html;
-// }
-
-// function prevMonth() {
-//   current.setMonth(current.getMonth() - 1);
-//   renderCalendar();
-// }
-
-// function nextMonth() {
-//   current.setMonth(current.getMonth() + 1);
-//   renderCalendar();
-// }
-
-// renderCalendar();
