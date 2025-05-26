@@ -150,6 +150,7 @@ $("#prev").on("click", function () {
     month = 11;
   }
   makeCalendar(year, month);
+  initScheduleData();
 });
 
 $("#next").on("click", function () {
@@ -159,52 +160,77 @@ $("#next").on("click", function () {
     month = 0;
   }
   makeCalendar(year, month);
+  initScheduleData();
 });
 
-//予定表入力
-const allScheduleData = [];
+let allScheduleData = [];//予定データ全体
 
-//ローカルストレージに保存
-$("#save").on("click", function () {
+//関数定義：予定の復元
+function initScheduleData() {
+  const saved = localStorage.getItem('saveData');
+  if (saved) {
+    allScheduleData = JSON.parse(saved);
+    allScheduleData.forEach(
+      item => { $(`#${item.date} .memo_box`).append(`<div class="memo_box_item">${item.title}</div>`) })
+  }
+}
+
+initScheduleData();//予定の復元
+
+//関数定義：ローカルストレージに保存＆画面表示
+function saveScheduleData() {
   const scheduleData = {
-    date:$("#modalTitle").text(),
+    date: $("#dateBoxId").text(),
     title: $("#title").val(),
     start: $("#startTime").val(),
     end: $("#endTime").val(),
     place: $("#place").val(),
     note: $("#note").val(),
   }
-  allScheduleData.push(scheduleData),
-    console.log(allScheduleData);
-  localStorage.setItem('data', JSON.stringify(allScheduleData));
+  allScheduleData.push(scheduleData);
+  localStorage.setItem('saveData', JSON.stringify(allScheduleData));
+  //↓画面に表示
+  $(`#${scheduleData.date} > .memo_box`).append(`<div class="memo_box_item">${scheduleData.title}</div>`);
+}
+
+//保存処理
+$("#save").on("click", function () {
+  saveScheduleData();
+  $(".overlay").css('display', 'none');
 });
 
 //予定入力画面の表示、日付表示
 $("tbody").on("click", ".date_box", function () {
-  const dateBoxId = $(this).attr('id');
-  console.log(dateBoxId);
-  const sheduleDate = `${dateBoxId.substr(3, 4)}年${dateBoxId.substr(7, 2)}月${dateBoxId.substr(9, 11)}日`;
-  console.log(sheduleDate);
-  $("#modalTitle").text(sheduleDate);
-  $(".overlay").css('display','block');
   $("#title").val("");
   $("#startTime").val("");
   $("#endTime").val("");
   $("#place").val("");
   $("#note").val("");
-
+  const dateBoxId = $(this).attr('id');
+  console.log(dateBoxId);
+  $("#dateBoxId").html(dateBoxId);
+  const sheduleDate = `${dateBoxId.substr(3, 4)}年${dateBoxId.substr(7, 2)}月${dateBoxId.substr(9, 11)}日`;
+  console.log(sheduleDate);
+  $("#modalTitle").text(sheduleDate);
+  $(".overlay").css('display', 'block');
 });
 
-//「閉じる」ボタンで閉じる
-$("#close").on("click", function(){
-  $(".overlay").css('display','none');
-});
 
-//ローカルストレージデータ削除
-$("#dataClear").on("click", function(){
+//関数の定義：ローカルストレージデータ削除
+function clearScheduleData() {
   const result = confirm('保存データを削除しますか？');
-  if(!result)
+  if (!result)
     return;
-  localStorage.removeItem('data');
+  $(".memo_box").empty();
+  localStorage.removeItem('saveData');
+  allScheduleData = [];
   alert('保存データを削除しました');
+}
+
+//データ削除処理
+$("#dataClear").on("click", function () {
+  clearScheduleData();
+
 });
+
+//キャンセルボタン作る。
