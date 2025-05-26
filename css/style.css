@@ -12,9 +12,54 @@ table td {
 
 }
 
-.calendar_wrapper {
+.wrapper {
+  position: relative;
   width: fit-content;
   margin: 0 auto;
+}
+
+
+/* .photo_box {
+  flex: 1;
+  /* background-image: linear-gradient(to top, rgba(217, 175, 217, 0.7) 0%, rgba(151, 217, 225, 0.7) 100%), url(../img/moritaka_img14.png);
+  background-size: cover; */
+/* } */ 
+
+/* .photo_box img {
+  width: 100%;
+  object-fit: cover;
+} */
+
+.cal_wrapper {
+  width: fit-content;
+  /* margin: 0 auto; */
+  background-image: linear-gradient(to top, rgba(217, 175, 217, 0.5) 0%, rgba(151, 217, 225, 0.5) 100%), url(../img/moritaka_img07.png);
+  background-size: cover;
+}
+
+.cal_wrapper h1 {
+  text-align: center;
+  color: red;
+  text-shadow:
+    1px 1px #fff;
+}
+
+.cal_wrapper h1>span {
+  font-size: 0.7em;
+}
+
+
+.cal_container {
+  width: fit-content;
+  margin: 0 auto;
+}
+
+/* #prev {
+  vertical-align: bottom;
+} */
+
+#prev img {
+  vertical-align: middle;
 }
 
 .month_box {
@@ -38,8 +83,20 @@ table td {
   justify-content: start;
 }
 
+table td:hover {
+  transform: scale(1.03);
+}
+
+table td:nth-child(6) {
+  color: blue;
+}
+
+table td:nth-child(7) {
+  color: red;
+}
+
 .day_box {
-  font-size: 0.6em;
+  font-size: 0.8em;
   width: 100%;
   height: 20%;
 }
@@ -51,4 +108,115 @@ table td {
 .memo_box {
   flex: 1;
   width: 100%;
+}
+
+.isdisabled {
+  background: rgb(240, 239, 239);
+  opacity: 0.3;
+}
+
+/* モーダルコンテント */
+.modal_content {
+  width: 300px;
+  margin: 0 auto;
+}
+
+.modal_content>p {
+  text-align: center;
+}
+
+#scheduleForm {
+  font-size: 0.8em;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 10px;
+}
+
+/* #title,
+#place {
+  display: block;
+} */
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(85, 84, 84, 0.6);
+  /* opacity: 0.6; */
+  z-index: 0;
+  display: none;
+}
+
+.modal_content {
+  background: #fff;
+  border: 1px solid gray;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 80%;
+  padding: 10px 0;
+  transform: translate(-50%,-50%);
+  opacity: 1;
+  z-index: 10;
+}
+
+.modal_item_title,
+.modal_item_time,
+.modal_item_place {
+  height: 30px;
+}
+
+.modal_item_title,
+.modal_item_time,
+.modal_item_place {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal_item_title input,
+.modal_item_place input {
+  flex: 1;
+  height: 24px;
+}
+
+.border_style {
+  border: 1px solid lightgray;
+}
+
+.modal_item_note {
+  height: 80px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.modal_item_note textarea {
+  flex: 1;
+  height: 60px;
+  font-weight: normal;
+}
+
+.modal_item_save {
+  display: flex;
+  justify-content: center;
+}
+
+.modal_item_save button,
+.modal_item_close button {
+  padding: 2px 4px;
+}
+
+.modal_item_close {
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-top: 30px;
+  padding-right: 20px;
+  /* position: absolute; */
+  /* bottom: 0; */
 }

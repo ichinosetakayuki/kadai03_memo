@@ -9,29 +9,63 @@
 </head>
 
 <body>
-  <div id="calendar"></div>
-  <button onclick="prevMonth()">←</button>
-  <button onclick="nextMonth()">→</button>
+  <div class="wrapper">
+    <!-- <div class="photo_box">
+      <img src="img/moritaka_img14.png" alt=""> -->
+    <!-- </div> -->
+    <div class="cal_wrapper">
+      <h1>森高千里 <span>Calendar</span></h1>
+      <div class="cal_container">
+        <div class="month_box">
+          <div id="prev"><img src="img/caret-left.svg" alt="">前月</div>
+          <h2 id="month"></h2>
+          <div id="next">翌月<img src="img/caret-right.svg" alt=""></div>
+        </div>
 
-  <div class="calendar_wrapper">
-    <div class="month_box">
-      <div id="prev"><img src="caret-left.svg" alt="">前月</div>
-      <h2 id="month"></h2>
-      <div id="next">翌月<img src="caret-right.svg" alt=""></div>
+
+        <table>
+          <thead>
+            <tr id="dayLabel"></tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="overlay">
+      <div class="modal_content">
+        <p id="modalTitle">日付</p>
+        <form id="scheduleForm" action="">
+          <div class="modal_item_title">
+            <label for="title">件　名</label>
+            <input type="text" id="title" name="title" class="border_style" required>
+          </div>
+          <div class="modal_item_time">
+            <label for="startTime">開始時間</label>
+            <input id="startTime" type="time" name="startTime" class="border_style">
+            <label for="endTime">終了時間</label><input id="endTime" type="time" class="border_style">
+          </div>
+          <div class="modal_item_place">
+            <label for="place">場　所</label>
+            <input id="place" type="text" name="place" class="border_style">
+          </div>
+          <div class="modal_item_note">
+            <label for="note">メ　モ</label>
+            <textarea name="note" id="note" class="border_style"></textarea>
+            <input type="hidden" id="date" name="date">
+          </div>
+          <div class="modal_item_save">
+            <button id="save" type="button">保　存</button>
+          </div>
+        </form>
+        <div class="modal_item_close">
+          <button id="close">閉じる</button>
+        </div>
+      </div>
     </div>
 
-
-    <table>
-      <thead>
-        <tr id="dayLabel"></tr>
-      </thead>
-      <tbody>
-
-      </tbody>
-    </table>
+    <div><button id="dataClear">保存データ削除</button></div>
   </div>
-
-
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
   <script src="js/main.js"></script>
