@@ -164,6 +164,7 @@ $("#next").on("click", function () {
 //予定表入力
 const allScheduleData = [];
 
+//ローカルストレージに保存
 $("#save").on("click", function () {
   const scheduleData = {
     date:$("#modalTitle").text(),
@@ -178,12 +179,32 @@ $("#save").on("click", function () {
   localStorage.setItem('data', JSON.stringify(allScheduleData));
 });
 
+//予定入力画面の表示、日付表示
 $("tbody").on("click", ".date_box", function () {
   const dateBoxId = $(this).attr('id');
   console.log(dateBoxId);
   const sheduleDate = `${dateBoxId.substr(3, 4)}年${dateBoxId.substr(7, 2)}月${dateBoxId.substr(9, 11)}日`;
   console.log(sheduleDate);
   $("#modalTitle").text(sheduleDate);
+  $(".overlay").css('display','block');
+  $("#title").val("");
+  $("#startTime").val("");
+  $("#endTime").val("");
+  $("#place").val("");
+  $("#note").val("");
 
 });
 
+//「閉じる」ボタンで閉じる
+$("#close").on("click", function(){
+  $(".overlay").css('display','none');
+});
+
+//ローカルストレージデータ削除
+$("#dataClear").on("click", function(){
+  const result = confirm('保存データを削除しますか？');
+  if(!result)
+    return;
+  localStorage.removeItem('data');
+  alert('保存データを削除しました');
+});
