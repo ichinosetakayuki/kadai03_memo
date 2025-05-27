@@ -119,7 +119,7 @@ function makeCalendar(year, month) {
       const dateId = `day${date.year}${monthStr}${dayStr}`;
       $(`#row${i}`).append(`<td><div id="${dateId}" class="date_box"><div class="day_box">${date.date}</div><div class=memo_box></div></div></td>`);
       if (date.isToday) {
-        $(`#${dateId}`).addClass('today');
+        $(`#${dateId}>.day_box`).addClass('today');
       }
       if (date.isDisabled) {
         $(`#${dateId}`).addClass('isdisabled');

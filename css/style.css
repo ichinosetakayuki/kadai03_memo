@@ -39,18 +39,49 @@ ul {
   /* margin: 0 auto; */
   background-image: linear-gradient(to top, rgba(217, 175, 217, 0.5) 0%, rgba(151, 217, 225, 0.5) 100%), url(../img/moritaka_img07.png);
   background-size: cover;
+  padding: 20px;
+}
+
+.m-plus-rounded-1c-regular {
+  font-family: "M PLUS Rounded 1c", sans-serif;
+  /* font-weight: 900; */
+  font-style: normal;
+
+  font-size: 44px;
+  color: #ff6f91;
+  text-shadow: 1px 1px 2px rgba(255, 192, 203, 0.4);
+}
+
+/* .pacifico-regular {
+  font-family: "Pacifico", cursive;
+  font-weight: 900;
+  font-style: normal;
+} */
+
+.calendar-cute {
+  font-family: 'Pacifico', cursive;
+  font-size: 40px;
+  color: #ff6f91;
+  text-shadow: 1px 1px 2px rgba(255, 192, 203, 0.4);
 }
 
 .cal_wrapper h1 {
   text-align: center;
-  color: red;
-  text-shadow: 1px 1px #fff;
+  /* color: red; */
+  /* text-shadow: 1px 1px #fff; */
   padding: 10px 0;
+  transform: rotate(-3deg);
+  /* letter-spacing: 0.1em; */
+
 }
 
-.cal_wrapper h1>span {
-  font-size: 0.7em;
+.yellow_under_line {
+  background: linear-gradient(transparent 50%, rgb(251, 244, 57) 100%);
 }
+
+/* .cal_wrapper h1>span {
+  font-size: 0.7em;
+} */
 
 
 .cal_container {
@@ -78,13 +109,13 @@ ul {
 }
 
 .day_of_week {
-  width: 60px;
+  width: 80px;
   height: 20px;
   border: 1px solid lightseagreen;
 }
 
 .date_box {
-  width: 60px;
+  width: 80px;
   height: 80px;
   display: flex;
   flex-direction: column;
@@ -111,8 +142,9 @@ table td:nth-child(7) {
 
 .today {
   font-weight: bold;
-  font-size: 1em;
+  /* font-size: 1em; */
   text-shadow: 1px 1px rgb(249, 249, 108);
+  background: rgba(239, 52, 133, 0.5);
 }
 
 .memo_box {
@@ -122,12 +154,14 @@ table td:nth-child(7) {
 
 .memo_box_item {
   font-size: 0.6em;
+  font-weight: bold;
   color: #000;
   width: 100%;
   height: 20%;
   overflow: hidden;
 }
 
+/* 前月、翌月の日にち */
 .isdisabled {
   background: rgb(240, 239, 239);
   opacity: 0.3;
@@ -271,4 +305,3 @@ table td:nth-child(7) {
   opacity: 1;
   z-index: 10;
 }
-
