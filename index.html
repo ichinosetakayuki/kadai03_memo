@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="css/style.css">
-  <title>Document</title>
+  <title>Motitaka Calendar</title>
 </head>
 
 <body>
@@ -55,14 +55,37 @@
             <textarea name="note" id="note" class="border_style"></textarea>
             <input type="hidden" id="date" name="date">
           </div>
+          <input type="hidden" id="editingIndex">
           <div class="modal_item_save">
             <button id="save" type="button">保　存</button>
+            <button id="upDate" type="button">更　新</button>
+            <button id="delete" type="button">削　除</button>
           </div>
         </form>
+        <div class="modal_item_cancel">
+          <button id="modalCancel">キャンセル</button>
+        </div>
       </div>
     </div>
 
-    <div><button id="dataClear">！全保存データ削除</button></div>
+    <div>
+      <button id="dataClear">！全保存データ削除</button>
+    </div>
+    <div class="event_overlay">
+      <div id="eventListBox" class="event_modal">
+        <p id="eventDay">日付</p>
+        <div id="eventDayId"></div>
+        <ul id="eventList"></ul>
+        <div>
+          <button id="newEntry">新規予定</button>
+        </div>
+        <div>
+          <button id="eventCancel">キャンセル</button>
+        </div>
+
+      </div>
+    </div>
+
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

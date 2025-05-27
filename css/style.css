@@ -12,6 +12,10 @@ table td {
 
 }
 
+ul {
+  list-style: none;
+}
+
 .wrapper {
   position: relative;
   width: fit-content;
@@ -23,7 +27,7 @@ table td {
   flex: 1;
   /* background-image: linear-gradient(to top, rgba(217, 175, 217, 0.7) 0%, rgba(151, 217, 225, 0.7) 100%), url(../img/moritaka_img14.png);
   background-size: cover; */
-/* } */ 
+/* } */
 
 /* .photo_box img {
   width: 100%;
@@ -40,8 +44,8 @@ table td {
 .cal_wrapper h1 {
   text-align: center;
   color: red;
-  text-shadow:
-    1px 1px #fff;
+  text-shadow: 1px 1px #fff;
+  padding: 10px 0;
 }
 
 .cal_wrapper h1>span {
@@ -57,10 +61,14 @@ table td {
 /* #prev {
   vertical-align: bottom;
 } */
-
-#prev img {
-  vertical-align: middle;
+#prev {
+  display: flex;
 }
+
+#next {
+  display: flex;
+}
+
 
 .month_box {
   width: 100%;
@@ -103,6 +111,8 @@ table td:nth-child(7) {
 
 .today {
   font-weight: bold;
+  font-size: 1em;
+  text-shadow: 1px 1px rgb(249, 249, 108);
 }
 
 .memo_box {
@@ -111,7 +121,8 @@ table td:nth-child(7) {
 }
 
 .memo_box_item {
-  font-size: 0.8em;
+  font-size: 0.6em;
+  color: #000;
   width: 100%;
   height: 20%;
   overflow: hidden;
@@ -170,7 +181,7 @@ table td:nth-child(7) {
   width: 80%;
   height: 80%;
   padding: 10px 0;
-  transform: translate(-50%,-50%);
+  transform: translate(-50%, -50%);
   opacity: 1;
   z-index: 10;
 }
@@ -218,14 +229,46 @@ table td:nth-child(7) {
 }
 
 .modal_item_save button,
-.modal_item_close button {
+.modal_item_cancel button {
   padding: 2px 4px;
 }
 
-/* .modal_item_close {
+.modal_item_cancel {
   display: flex;
   justify-content: end;
   align-items: center;
   margin-top: 30px;
   padding-right: 20px;
-} */
+}
+
+/* イベントリスト */
+#eventDayId {
+  display: none;
+}
+
+.event_overlay {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: rgba(85, 84, 84, 0.6);
+  /* opacity: 0.6; */
+  z-index: 0;
+  display: none;
+}
+
+.event_modal {
+  background: #fff;
+  border: 1px solid gray;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 80%;
+  height: 80%;
+  padding: 10px 0;
+  transform: translate(-50%, -50%);
+  opacity: 1;
+  z-index: 10;
+}
+

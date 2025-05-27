@@ -8,8 +8,8 @@ let year = today.getFullYear();
 // const lastDay = new Date(year, month + 1, 0);
 // const startDay = firstDay.getDay();
 // const datesInMonth = lastDay.getDate();
-console.log(year);
-console.log(month);
+// console.log(year);
+// console.log(month);
 // console.log(date);
 // console.log(day);
 // console.log(firstDay.toLocaleString());
@@ -17,15 +17,13 @@ console.log(month);
 // console.log(startDay);
 // console.log(datesInMonth);
 
-
+// 見出しの年月と曜日
 const days = ['月', '火', '水', '木', '金', '土', '日'];
-
 $("#month").html(year + '年' + (month + 1) + '月');
-
 days.forEach(d => $("#dayLabel").append(`<th class="day_of_week">${d}</th>`));
 
 
-
+// 前月の終わりの日
 function getPrevMonthdays(year, month) {
   const prevMonthDate = new Date(year, month, 0);
   const d = prevMonthDate.getDate();
@@ -44,7 +42,6 @@ function getPrevMonthdays(year, month) {
       isHoliday: false,
     });
   }
-  // console.log(dates);
   return dates;
 }
 
@@ -67,7 +64,6 @@ function getCurrentMonthDays(year, month) {
   if (year === today.getFullYear() && month === today.getMonth()) {
     dates[today.getDate() - 1].isToday = true;
   }
-  // console.log(dates);
   return dates;
 }
 
@@ -91,7 +87,6 @@ function getNextMonthdays(year, month) {
       })
     }
   }
-  // console.log(dates);
   return dates;
 }
 
@@ -115,14 +110,6 @@ function makeCalendar(year, month) {
   for (let i = 0; i < weeksCount; i++) {
     weeks.push(dates.splice(0, 7));
   }
-  console.log(weeks);
-
-  // weeks.forEach(week => {
-  //   $("tbody").append(`<tr id="row"></tr>`);
-  //   week.forEach(date => {
-  //     $("#row").append(`<td>${date.date}</td>`);
-  //   });
-  // });
 
   for (let i = 0; i < weeksCount; i++) {
     $("tbody").append(`<tr id="row${i}"></tr>`);
@@ -193,27 +180,139 @@ function saveScheduleData() {
   $(`#${scheduleData.date} > .memo_box`).append(`<div class="memo_box_item">${scheduleData.title}</div>`);
 }
 
-//保存処理
+//保存ボタン処理
 $("#save").on("click", function () {
   saveScheduleData();
   $(".overlay").css('display', 'none');
 });
 
-//予定入力画面の表示、日付表示
+// 日をクリックして予定リストを呼出
 $("tbody").on("click", ".date_box", function () {
+  $(".event_overlay").css('display', 'block');
+
+  const dateBoxId = $(this).attr('id');
+  $("#eventDayId").html(dateBoxId);
+  $("#dateBoxId").html(dateBoxId);
+  const sheduleDate = `${dateBoxId.substr(3, 4)}年${dateBoxId.substr(7, 2)}月${dateBoxId.substr(9, 2)}日`;
+  // console.log(sheduleDate);
+  $("#eventDay").text(sheduleDate);
+
+  $("#eventList").empty();//一度リストを初期化
+
+  //予定がはいっていたら、その予定を表示
+  const result = $(this).find('.memo_box_item');
+  if (result.length) {
+    const eventList = allScheduleData.filter(item => item.date === dateBoxId);
+    eventList.forEach(item => {
+      $("#eventList").append(`<li class="eventList_item">${item.start}:${item.title}</li>`);
+    });
+  }
+});
+
+//キャンセルボタン
+$("#eventCancel").on("click", function () {
+  $(".event_overlay").css('display', 'none');
+});
+
+//新規予定入力の表示、日付表示
+$("#newEntry").on("click", function () {
   $("#title").val("");
   $("#startTime").val("");
   $("#endTime").val("");
   $("#place").val("");
   $("#note").val("");
-  const dateBoxId = $(this).attr('id');
-  console.log(dateBoxId);
-  $("#dateBoxId").html(dateBoxId);
-  const sheduleDate = `${dateBoxId.substr(3, 4)}年${dateBoxId.substr(7, 2)}月${dateBoxId.substr(9, 11)}日`;
-  console.log(sheduleDate);
+  const sheduleDate = $("#eventDay").text();
   $("#modalTitle").text(sheduleDate);
+  $(".event_overlay").css('display', 'none');
   $(".overlay").css('display', 'block');
 });
+
+//イベントの編集画面に遷移
+$("#eventList").on("click", ".eventList_item", function () {
+  // console.log('ok');
+  const text = $(this).text();
+  const start = text.substr(0, 5);
+  const title = text.substr(6);
+  const targetDate = $("#eventDayId").text();
+
+  const index = allScheduleData.findIndex(item => item.date === targetDate && item.title === title && item.start === start);
+
+  if (index !== -1) {
+    const item = allScheduleData[index];
+
+    $("#title").val(item.title);
+    $("#startTime").val(item.start);
+    $("#endTime").val(item.end);
+    $("#place").val(item.place);
+    $("#note").val(item.note);
+    $("#modalTitle").text(`${item.date.substr(3, 4)}年${item.date.substr(7, 2)}月${item.date.substr(9, 2)}日`);
+    $("#dateBoxId").text(item.date);
+    $("#editingIndex").val(index);
+
+    $(".event_overlay").css('display', 'none');
+    $(".overlay").css('display', 'block');
+  } else {
+    alert('該当データがありません')
+  }
+
+});
+
+// イベント編集後の更新
+$("#upDate").on("click", function () {
+  const index = $("#editingIndex").val();
+
+  if (index !== "") {
+    const upDateItem = {
+      date: $("#dateBoxId").text(),
+      title: $("#title").val(),
+      start: $("#startTime").val(),
+      end: $("#endTime").val(),
+      place: $("#place").val(),
+      note: $("#note").val(),
+    };
+
+    allScheduleData[index] = upDateItem;
+    localStorage.setItem('saveData', JSON.stringify(allScheduleData));
+
+    $(".memo_box").empty();
+    initScheduleData();
+
+    $(".overlay").css('display', 'none');
+  }
+});
+
+// イベントの削除
+
+$("#delete").on("click", function () {
+  console.log('ok');
+  const index = $("#editingIndex").val();
+  console.log(index);
+  if (index !== "") {
+    allScheduleData.splice(index, 1);
+
+    localStorage.setItem('saveData', JSON.stringify(allScheduleData));
+    $(".memo_box").empty();
+    initScheduleData();
+
+    $(".overlay").css('display', 'none');
+  }
+});
+
+//予定入力画面の表示、日付表示
+// $("tbody").on("click", ".date_box", function () {
+//   $("#title").val("");
+//   $("#startTime").val("");
+//   $("#endTime").val("");
+//   $("#place").val("");
+//   $("#note").val("");
+//   const dateBoxId = $(this).attr('id');
+//   console.log(dateBoxId);
+//   $("#dateBoxId").html(dateBoxId);
+//   const sheduleDate = `${dateBoxId.substr(3, 4)}年${dateBoxId.substr(7, 2)}月${dateBoxId.substr(9, 11)}日`;
+//   console.log(sheduleDate);
+//   $("#modalTitle").text(sheduleDate);
+//   $(".overlay").css('display', 'block');
+// });
 
 
 //関数の定義：ローカルストレージデータ削除
@@ -233,4 +332,7 @@ $("#dataClear").on("click", function () {
 
 });
 
-//キャンセルボタン作る。
+//キャンセルボタン
+$("#modalCancel").on("click", function () {
+  $(".overlay").css('display', 'none');
+});
