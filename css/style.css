@@ -22,22 +22,10 @@ ul {
   margin: 0 auto;
 }
 
-
-/* .photo_box {
-  flex: 1;
-  /* background-image: linear-gradient(to top, rgba(217, 175, 217, 0.7) 0%, rgba(151, 217, 225, 0.7) 100%), url(../img/moritaka_img14.png);
-  background-size: cover; */
-/* } */
-
-/* .photo_box img {
-  width: 100%;
-  object-fit: cover;
-} */
-
 .cal_wrapper {
   width: fit-content;
   /* margin: 0 auto; */
-  background-image: linear-gradient(to top, rgba(217, 175, 217, 0.5) 0%, rgba(151, 217, 225, 0.5) 100%), url(../img/moritaka_img07.png);
+  background-image: linear-gradient(to top, rgba(217, 175, 217, 0.5) 0%, rgba(151, 217, 225, 0.5) 100%), url(../img/moritaka_img01.png);
   background-size: cover;
   padding: 20px;
 }
@@ -52,11 +40,6 @@ ul {
   text-shadow: 1px 1px 2px rgba(255, 192, 203, 0.4);
 }
 
-/* .pacifico-regular {
-  font-family: "Pacifico", cursive;
-  font-weight: 900;
-  font-style: normal;
-} */
 
 .calendar-cute {
   font-family: 'Pacifico', cursive;
@@ -67,11 +50,8 @@ ul {
 
 .cal_wrapper h1 {
   text-align: center;
-  /* color: red; */
-  /* text-shadow: 1px 1px #fff; */
   padding: 10px 0;
   transform: rotate(-3deg);
-  /* letter-spacing: 0.1em; */
 
 }
 
@@ -79,19 +59,11 @@ ul {
   background: linear-gradient(transparent 50%, rgb(251, 244, 57) 100%);
 }
 
-/* .cal_wrapper h1>span {
-  font-size: 0.7em;
-} */
-
-
 .cal_container {
   width: fit-content;
   margin: 0 auto;
 }
 
-/* #prev {
-  vertical-align: bottom;
-} */
 #prev {
   display: flex;
 }
@@ -212,7 +184,6 @@ table td:nth-child(7) {
   width: 100%;
   height: 100%;
   background: rgba(85, 84, 84, 0.6);
-  /* opacity: 0.6; */
   z-index: 0;
   display: none;
 }
@@ -227,7 +198,6 @@ table td:nth-child(7) {
   height: 80%;
   padding: 20px;
   transform: translate(-50%, -50%);
-  opacity: 1;
   z-index: 10;
 }
 
@@ -305,7 +275,6 @@ table td:nth-child(7) {
 
 .event_overlay {
   position: absolute;
-  /* top: 50%; */
   bottom: 0;
   left: 0;
   width: 100%;
@@ -330,7 +299,6 @@ table td:nth-child(7) {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  /* align-items: center; */
 }
 
 #eventDay::after {
@@ -368,5 +336,70 @@ table td:nth-child(7) {
 }
 
 .button_box button {
+  padding: 2px 4px;
+}
+
+/* 壁紙のCSS */
+.wallPaper_overlay {
+  width: 90%;
+  padding: 20px;
+  /* margin: 0 auto; */
+  background: lightcyan;
+  box-shadow: 2px 2px 4px 4px lightblue;
+  display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.wallPaper_box {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.wallPaper_box p::before {
+  content: '';
+  width: 8px;
+  height: 1.0em;
+  display: inline-block;
+  background: rgb(255, 122, 224);
+  margin-right: 6px;
+  vertical-align: middle;
+  transform: translateY(-1px);
+}
+
+#wallPapers {
+  display: flex;
+  gap: 10px;
+}
+
+.wallPaper {
+  width: 100%;
+  border: 1px solid lightpink;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 2px 2px 2px 2px rgb(250, 133, 151);
+}
+
+.wallPaper img {
+  width: 100%;
+  object-fit: cover;
+}
+
+.wallPaper.selected {
+  outline: 3px solid deeppink;
+}
+
+#wallPaperBtnBox {
+  display: flex;
+  justify-content: end;
+  gap: 20px;
+  margin-top: 10px;
+}
+
+#wallPaperBtnBox button {
   padding: 2px 4px;
 }
