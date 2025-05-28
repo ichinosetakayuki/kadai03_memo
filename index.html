@@ -17,7 +17,8 @@
       <img src="img/moritaka_img14.png" alt=""> -->
     <!-- </div> -->
     <div class="cal_wrapper">
-      <h1 class="m-plus-rounded-1c-regular"><span class="yellow_under_line">森高千里 <span class="pacifico-regular calendar-cute">Calendar</span></span></h1>
+      <h1 class="m-plus-rounded-1c-regular"><span class="yellow_under_line">森高千里 <span
+            class="pacifico-regular calendar-cute">Calendar</span></span></h1>
       <div class="cal_container">
         <div class="month_box">
           <div id="prev"><img src="img/caret-left.svg" alt="">前月</div>
@@ -59,7 +60,7 @@
             <input type="hidden" id="date" name="date">
           </div>
           <input type="hidden" id="editingIndex">
-          <div class="modal_item_save">
+          <div class="modal_item_buttons">
             <button id="save" type="button">保　存</button>
             <button id="upDate" type="button">更　新</button>
             <button id="delete" type="button">削　除</button>
@@ -71,24 +72,30 @@
       </div>
     </div>
 
-    <div>
-      <button id="dataClear">！全保存データ削除</button>
-    </div>
+
     <div class="event_overlay">
       <div id="eventListBox" class="event_modal">
         <p id="eventDay">日付</p>
         <div id="eventDayId"></div>
         <ul id="eventList"></ul>
-        <div>
-          <button id="newEntry">新規予定</button>
-        </div>
-        <div>
-          <button id="eventCancel">キャンセル</button>
+        <div class="button_box">
+          <div>
+            <button id="newEntry">新規予定</button>
+          </div>
+          <div>
+            <button id="eventCancel">閉じる</button>
+          </div>
+
         </div>
 
       </div>
     </div>
-
+    <div>
+      <button id="dataClear">！全保存データ削除</button>
+    </div>
+    <div>
+      <button id="selectWallPaper">壁紙選択</button>
+    </div>
   </div>
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>

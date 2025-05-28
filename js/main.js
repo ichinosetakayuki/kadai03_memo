@@ -124,6 +124,9 @@ function makeCalendar(year, month) {
       if (date.isDisabled) {
         $(`#${dateId}`).addClass('isdisabled');
       }
+      if (date.month === 4 && date.date === 11) {
+        $(`#${dateId} .day_box`).addClass('moritaka_birthday');
+      }
     });
   }
 }
@@ -186,15 +189,15 @@ $("#save").on("click", function () {
   $(".overlay").css('display', 'none');
 });
 
-// 日をクリックして予定リストを呼出
+// 日をクリックして予定リスト画面を呼出
 $("tbody").on("click", ".date_box", function () {
-  $(".event_overlay").css('display', 'block');
+  // $(".event_overlay").css('display', 'block');
+  $(".event_overlay").slideDown(300);
 
   const dateBoxId = $(this).attr('id');
   $("#eventDayId").html(dateBoxId);
   $("#dateBoxId").html(dateBoxId);
   const sheduleDate = `${dateBoxId.substr(3, 4)}年${dateBoxId.substr(7, 2)}月${dateBoxId.substr(9, 2)}日`;
-  // console.log(sheduleDate);
   $("#eventDay").text(sheduleDate);
 
   $("#eventList").empty();//一度リストを初期化
@@ -204,18 +207,25 @@ $("tbody").on("click", ".date_box", function () {
   if (result.length) {
     const eventList = allScheduleData.filter(item => item.date === dateBoxId);
     eventList.forEach(item => {
-      $("#eventList").append(`<li class="eventList_item">${item.start}:${item.title}</li>`);
+      $("#eventList").append(`<li class="eventList_item">${item.start}：${item.title}</li>`);
     });
   }
 });
 
-//キャンセルボタン
+//予定リスト画面のキャンセルボタン
+// 予定リスト画面を閉じる
 $("#eventCancel").on("click", function () {
-  $(".event_overlay").css('display', 'none');
+  // $(".event_overlay").css('display', 'none');
+  $(".event_overlay").slideUp(300);
 });
+
+let previousOverlay = null;
+//現在の画面状態を記録する変数
 
 //新規予定入力の表示、日付表示
 $("#newEntry").on("click", function () {
+  previousOverlay = 'eventList';
+
   $("#title").val("");
   $("#startTime").val("");
   $("#endTime").val("");
@@ -225,11 +235,19 @@ $("#newEntry").on("click", function () {
   $("#modalTitle").text(sheduleDate);
   $(".event_overlay").css('display', 'none');
   $(".overlay").css('display', 'block');
+
+  $("#save").hide().show();//保存ボタン表示
+  $("#upDate").hide();
+  $("#delete").hide();
+  //更新ボタン、削除ボタンは削除
+
 });
 
-//イベントの編集画面に遷移
+//既存予定をクリック→予定編集画面に遷移
 $("#eventList").on("click", ".eventList_item", function () {
-  // console.log('ok');
+
+  previousOverlay = 'eventList';
+
   const text = $(this).text();
   const start = text.substr(0, 5);
   const title = text.substr(6);
@@ -251,6 +269,12 @@ $("#eventList").on("click", ".eventList_item", function () {
 
     $(".event_overlay").css('display', 'none');
     $(".overlay").css('display', 'block');
+
+    $("#save").hide();//保存ボタン削除
+    $("#upDate").hide().show();
+    $("#delete").hide().show();
+    //更新ボタン、削除ボタンは表示
+
   } else {
     alert('該当データがありません')
   }
@@ -298,22 +322,6 @@ $("#delete").on("click", function () {
   }
 });
 
-//予定入力画面の表示、日付表示
-// $("tbody").on("click", ".date_box", function () {
-//   $("#title").val("");
-//   $("#startTime").val("");
-//   $("#endTime").val("");
-//   $("#place").val("");
-//   $("#note").val("");
-//   const dateBoxId = $(this).attr('id');
-//   console.log(dateBoxId);
-//   $("#dateBoxId").html(dateBoxId);
-//   const sheduleDate = `${dateBoxId.substr(3, 4)}年${dateBoxId.substr(7, 2)}月${dateBoxId.substr(9, 11)}日`;
-//   console.log(sheduleDate);
-//   $("#modalTitle").text(sheduleDate);
-//   $(".overlay").css('display', 'block');
-// });
-
 
 //関数の定義：ローカルストレージデータ削除
 function clearScheduleData() {
@@ -326,13 +334,19 @@ function clearScheduleData() {
   alert('保存データを削除しました');
 }
 
-//データ削除処理
+//全予定データ削除処理
 $("#dataClear").on("click", function () {
   clearScheduleData();
 
 });
 
-//キャンセルボタン
+//予定入力画面のキャンセルボタン
 $("#modalCancel").on("click", function () {
   $(".overlay").css('display', 'none');
+
+  if (previousOverlay === 'eventList') {
+    $(".event_overlay").css('display', 'block');
+  }
+  previousOverlay === null;
 });
+
