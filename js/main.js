@@ -23,7 +23,7 @@ $("#month").html(year + '年' + (month + 1) + '月');
 days.forEach(d => $("#dayLabel").append(`<th class="day_of_week">${d}</th>`));
 
 
-// 前月の終わりの日
+// 当月のカレンダーに表示される前月の終わりの日々の配列を作る関数
 function getPrevMonthdays(year, month) {
   const prevMonthDate = new Date(year, month, 0);
   const d = prevMonthDate.getDate();
@@ -47,7 +47,7 @@ function getPrevMonthdays(year, month) {
 
 getPrevMonthdays(year, month);
 
-
+// 今月の日々の配列を作る関数
 function getCurrentMonthDays(year, month) {
   const dates = [];
   const datesInMonth = new Date(year, month + 1, 0).getDate();
@@ -69,6 +69,7 @@ function getCurrentMonthDays(year, month) {
 
 getCurrentMonthDays(year, month);
 
+// 当月のカレンダーに表示される翌月の日々の配列を作る関数
 function getNextMonthdays(year, month) {
   const nextMonthDate = new Date(year, month + 1, 1);
   const nextMonth = nextMonthDate.getMonth() + 1;
@@ -92,6 +93,7 @@ function getNextMonthdays(year, month) {
 
 getNextMonthdays(year, month);
 
+// カレンダーを描画する関数
 function makeCalendar(year, month) {
 
   $("#month").html(year + '年' + (month + 1) + '月');
@@ -102,7 +104,7 @@ function makeCalendar(year, month) {
     ...getCurrentMonthDays(year, month),
     ...getNextMonthdays(year, month),
   ];
-  console.log(dates);
+  // console.log(dates);
 
   const weeks = [];
   const weeksCount = dates.length / 7;
@@ -133,6 +135,30 @@ function makeCalendar(year, month) {
 
 makeCalendar(year, month);
 
+// APIを使って、今年と来年の祝日データを取得し、祝日表示する関数
+function makeHolidays() {
+
+  fetch('https://api.national-holidays.jp/recent')
+    .then(response => response.json())
+    .then(holidays => {
+      // console.log('祝日', holidays);
+      holidays.forEach(holiday => {
+        const holidayName = holiday.name;
+        const holidayId = `day${holiday.date.substr(0, 4)}${holiday.date.substr(5, 2)}${holiday.date.substr(8, 2)}`;
+        // console.log(holidayName);
+        // console.log(holidayId);
+        $(`#${holidayId}>.day_box`).addClass('holiday').append(holidayName);
+      })
+
+    })
+    .catch(error => {
+      console.error('祝日データの取得に失敗しました：', error);
+    });
+}
+
+makeHolidays();
+
+// 「前月」クリックで前月のカレンダーを描画する関数
 $("#prev").on("click", function () {
   month--;
   if (month < 0) {
@@ -141,8 +167,10 @@ $("#prev").on("click", function () {
   }
   makeCalendar(year, month);
   initScheduleData();
+  makeHolidays();
 });
 
+// 「翌月」クリックで翌月のカレンダーを描画する関数
 $("#next").on("click", function () {
   month++;
   if (month > 11) {
@@ -151,6 +179,7 @@ $("#next").on("click", function () {
   }
   makeCalendar(year, month);
   initScheduleData();
+  makeHolidays();
 });
 
 let allScheduleData = [];//予定データ全体
@@ -393,4 +422,7 @@ $(function () {
 $("#wallPaperCancelBtn").on("click", function () {
   $(".wallPaper_overlay").css('display', 'none');
 });
+
+
+
 

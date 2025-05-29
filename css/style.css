@@ -55,6 +55,21 @@ ul {
 
 }
 
+.setting_icon {
+  width: 30px;
+  height: 30px;
+  /* background: pink; */
+  border-radius: 50%;
+  position: absolute;
+  top: 10%;
+  right: 5%;
+}
+
+.setting_icon img {
+  width: 100%;
+  object-fit: cover;
+}
+
 .yellow_under_line {
   background: linear-gradient(transparent 50%, rgb(251, 244, 57) 100%);
 }
@@ -106,6 +121,7 @@ table td:nth-child(7) {
   color: red;
 }
 
+/* 日にち部分 */
 .day_box {
   font-size: 0.8em;
   width: 100%;
@@ -113,16 +129,23 @@ table td:nth-child(7) {
   padding-left: 1px;
 }
 
+/* 祝日 */
+.holiday {
+  color: red;
+}
+
 /* 森高BDの装飾 */
 .moritaka_birthday::before {
   content: url(../img/cake2.svg);
   background: pink;
 }
+
 /* 森高BDの装飾 */
 .moritaka_birthday::after {
   content: '森高BD';
   color: #ff6f91;
 }
+
 /* 本日の装飾 */
 .today {
   font-weight: bold;
@@ -130,7 +153,7 @@ table td:nth-child(7) {
   background: rgba(239, 52, 133, 0.5);
 }
 
-
+/* カレンダー予定表示枠 */
 .memo_box {
   flex: 1;
   width: 100%;
@@ -153,6 +176,16 @@ table td:nth-child(7) {
 .isdisabled {
   background: rgb(240, 239, 239);
   opacity: 0.3;
+}
+
+/* 設定関係ボタン枠 */
+.setting {
+  display: flex;
+  gap: 10px;
+}
+
+.setting button {
+  padding: 2px 4px;
 }
 
 /* モーダルコンテント */

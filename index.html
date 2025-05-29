@@ -13,20 +13,19 @@
 
 <body>
   <div class="wrapper">
-    <!-- <div class="photo_box">
-      <img src="img/moritaka_img14.png" alt=""> -->
-    <!-- </div> -->
     <div class="cal_wrapper">
       <h1 class="m-plus-rounded-1c-regular"><span class="yellow_under_line">森高千里 <span
             class="pacifico-regular calendar-cute">Calendar</span></span></h1>
+      <div class="setting_icon">
+        <img src="img/balloon-heart.svg" alt="設定アイコン">
+      </div>
       <div class="cal_container">
         <div class="month_box">
           <div id="prev"><img src="img/caret-left.svg" alt="">前月</div>
           <h2 id="month"></h2>
           <div id="next">翌月<img src="img/caret-right.svg" alt=""></div>
         </div>
-
-
+        <!-- カレンダー部分 -->
         <table>
           <thead>
             <tr id="dayLabel"></tr>
@@ -36,6 +35,18 @@
         </table>
       </div>
     </div>
+
+    <!-- 設定関係ボタン -->
+    <div class="setting">
+      <div>
+        <button id="selectWallPaper">壁紙選択</button>
+      </div>
+      <div>
+        <button id="dataClear">！全保存データ削除</button>
+      </div>
+    </div>
+
+    <!-- 予定の新規入力・編集モーダル画面 -->
     <div class="overlay">
       <div class="modal_content">
         <p id="modalTitle">日付</p>
@@ -72,7 +83,7 @@
       </div>
     </div>
 
-
+    <!-- 予定一覧のモーダル画面 -->
     <div class="event_overlay">
       <div id="eventListBox" class="event_modal">
         <p id="eventDay">日付</p>
@@ -85,38 +96,33 @@
           <div>
             <button id="eventCancel">閉じる</button>
           </div>
-
-        </div>
-
-      </div>
-    </div>
-    <div>
-      <button id="dataClear">！全保存データ削除</button>
-    </div>
-    <div>
-      <button id="selectWallPaper">壁紙選択</button>
-    </div>
-  </div>
-  <div class="wallPaper_overlay">
-    <div class="wallPaper_box">
-      <p>壁紙選択</p>
-      <div id="wallPapers">
-        <div class="wallPaper">
-          <img src="img/moritaka_img01.png" alt="森高壁紙">
-        </div>
-        <div class="wallPaper">
-          <img src="img/moritaka_img02.png" alt="森高壁紙">
-        </div>
-        <div class="wallPaper">
-          <img src="img/moritaka_img03.png" alt="森高壁紙">
         </div>
       </div>
-      <div id="wallPaperBtnBox">
-        <button id="wallPaperChange" type="button">変　更</button>
-        <button id="wallPaperCancelBtn" type="button">キャンセル</button>
+    </div>
+
+    <!-- 壁紙選択モーダル画面 -->
+    <div class="wallPaper_overlay">
+      <div class="wallPaper_box">
+        <p>壁紙選択</p>
+        <div id="wallPapers">
+          <div class="wallPaper">
+            <img src="img/moritaka_img01.png" alt="森高壁紙">
+          </div>
+          <div class="wallPaper">
+            <img src="img/moritaka_img02.png" alt="森高壁紙">
+          </div>
+          <div class="wallPaper">
+            <img src="img/moritaka_img03.png" alt="森高壁紙">
+          </div>
+        </div>
+        <div id="wallPaperBtnBox">
+          <button id="wallPaperChange" type="button">変　更</button>
+          <button id="wallPaperCancelBtn" type="button">キャンセル</button>
+        </div>
       </div>
     </div>
   </div>
+
 
 
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
