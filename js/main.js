@@ -2,20 +2,7 @@
 const today = new Date();
 let month = today.getMonth();
 let year = today.getFullYear();
-// const date = today.getDate();
-// const day = today.getDay();
-// const firstDay = new Date(year, month, 1);
-// const lastDay = new Date(year, month + 1, 0);
-// const startDay = firstDay.getDay();
-// const datesInMonth = lastDay.getDate();
-// console.log(year);
-// console.log(month);
-// console.log(date);
-// console.log(day);
-// console.log(firstDay.toLocaleString());
-// console.log(lastDay.toLocaleString());
-// console.log(startDay);
-// console.log(datesInMonth);
+
 
 // 見出しの年月と曜日
 const days = ['月', '火', '水', '木', '金', '土', '日'];
@@ -366,7 +353,6 @@ function clearScheduleData() {
 //全予定データ削除処理
 $("#dataClear").on("click", function () {
   clearScheduleData();
-
 });
 
 //予定入力画面のキャンセルボタン

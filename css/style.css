@@ -24,7 +24,6 @@ ul {
 
 .cal_wrapper {
   width: fit-content;
-  /* margin: 0 auto; */
   background-image: linear-gradient(to top, rgba(217, 175, 217, 0.5) 0%, rgba(151, 217, 225, 0.5) 100%), url(../img/moritaka_img01.png);
   background-size: cover;
   padding: 20px;
@@ -55,21 +54,6 @@ ul {
 
 }
 
-.setting_icon {
-  width: 30px;
-  height: 30px;
-  /* background: pink; */
-  border-radius: 50%;
-  position: absolute;
-  top: 10%;
-  right: 5%;
-}
-
-.setting_icon img {
-  width: 100%;
-  object-fit: cover;
-}
-
 .yellow_under_line {
   background: linear-gradient(transparent 50%, rgb(251, 244, 57) 100%);
 }
@@ -86,7 +70,6 @@ ul {
 #next {
   display: flex;
 }
-
 
 .month_box {
   width: 100%;
@@ -150,7 +133,7 @@ table td:nth-child(7) {
 .today {
   font-weight: bold;
   text-shadow: 1px 1px rgb(249, 249, 108);
-  background: rgba(239, 52, 133, 0.5);
+  background: rgba(247, 118, 215, 0.5);
 }
 
 /* カレンダー予定表示枠 */
@@ -163,10 +146,8 @@ table td:nth-child(7) {
 
 .memo_box_item {
   font-size: 0.6em;
-  font-weight: bold;
   color: #000;
   width: 100%;
-  /* height: 20%; */
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
@@ -182,11 +163,28 @@ table td:nth-child(7) {
 .setting {
   display: flex;
   gap: 10px;
+  padding: 4px 0 0 10px ;
 }
 
 .setting button {
   padding: 2px 4px;
+  background: rgb(250, 255, 224);
+  color: #ff6f91;
+  font-weight: bold;
+  border: 1px solid lightsalmon;
+  border-radius: 4px;
+  letter-spacing: 0.2em;
+  font-size: 1em;
 }
+
+.setting button:hover {
+  border: 2px solid #ff6f91;
+}
+
+#dataClear:hover {
+  color: red;
+}
+
 
 /* モーダルコンテント */
 .modal_content {
@@ -234,15 +232,9 @@ table td:nth-child(7) {
   z-index: 10;
 }
 
-.modal_content label::before {
-  content: '';
-  width: 8px;
-  height: 1.0em;
-  display: inline-block;
-  background: rgb(255, 122, 224);
-  margin-right: 6px;
-  vertical-align: middle;
-  transform: translateY(-1px);
+.modal_content label {
+  border-left: 8px solid rgb(255, 122, 224);
+  padding-left: 8px;
 }
 
 .modal_item_title,
@@ -363,6 +355,8 @@ table td:nth-child(7) {
   margin-right: 10px;
 }
 
+
+
 .button_box {
   display: flex;
   justify-content: space-between;
@@ -393,15 +387,10 @@ table td:nth-child(7) {
   gap: 20px;
 }
 
-.wallPaper_box p::before {
-  content: '';
-  width: 8px;
-  height: 1.0em;
-  display: inline-block;
-  background: rgb(255, 122, 224);
-  margin-right: 6px;
-  vertical-align: middle;
-  transform: translateY(-1px);
+
+.wallPaper_box p {
+  border-left: 8px solid rgb(255, 122, 224);
+  padding-left: 8px;
 }
 
 #wallPapers {
